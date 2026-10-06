@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import styles from "./SectionHeading.module.scss";
 
 type SectionHeadingProps = {
-  overline?: string;
+  overline?: ReactNode;
   title: ReactNode;
   description?: ReactNode;
   align?: "start" | "center";

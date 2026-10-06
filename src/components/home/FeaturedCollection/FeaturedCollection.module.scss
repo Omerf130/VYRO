@@ -1,0 +1,328 @@
+@use "../../../styles/abstracts/mixins" as *;
+
+.section {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+  padding-block: clamp(var(--vyro-space-8), 8vw, var(--vyro-space-10));
+  background: var(--vyro-bg-base);
+  border-top: 1px solid var(--vyro-border-subtle);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(var(--vyro-space-6), 5vw, var(--vyro-space-8));
+}
+
+.heading {
+  max-width: 34rem;
+  gap: var(--vyro-space-2);
+}
+
+.heading h2 {
+  font-size: clamp(1.875rem, 5.25vw, 2.75rem);
+  font-weight: 800;
+  line-height: 0.94;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.eyebrowLabel {
+  background: linear-gradient(
+    90deg,
+    var(--vyro-accent-purple) 0%,
+    var(--vyro-accent-blue) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(var(--vyro-space-7), 7vw, var(--vyro-space-9));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gridItem {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.product {
+  --featured-transition: var(--vyro-duration-normal) var(--vyro-ease-out);
+  display: flex;
+  flex-direction: column;
+  gap: var(--vyro-space-3);
+  min-width: 0;
+}
+
+.visual {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+  height: clamp(12.5rem, 46vw, 16rem);
+  overflow-x: clip;
+  overflow-y: visible;
+  background: transparent;
+}
+
+.composition {
+  position: relative;
+  width: min(104%, 23.5rem);
+  max-width: 100%;
+  margin-inline: auto;
+  transition: transform var(--featured-transition);
+}
+
+.effectBack {
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  width: 122%;
+  max-width: none;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.94;
+  mix-blend-mode: screen;
+  transform: translate(-50%, -50%);
+  transition:
+    opacity var(--featured-transition),
+    transform var(--featured-transition);
+  -webkit-mask-image: radial-gradient(
+    ellipse 90% 84% at 50% 50%,
+    #000 38%,
+    rgb(0 0 0 / 55%) 62%,
+    transparent 78%
+  );
+  mask-image: radial-gradient(
+    ellipse 90% 84% at 50% 50%,
+    #000 38%,
+    rgb(0 0 0 / 55%) 62%,
+    transparent 78%
+  );
+}
+
+.shoeWrap {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  transition:
+    transform var(--featured-transition),
+    filter var(--featured-transition);
+}
+
+.shoe {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 28px rgb(0 0 0 / 28%));
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--vyro-space-1);
+  max-width: 20rem;
+}
+
+.index {
+  margin: 0;
+  font-size: var(--vyro-text-caption);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--vyro-text-muted);
+}
+
+.product[data-accent="nexus"] .index {
+  color: rgb(64 200 255 / 88%);
+}
+
+.product[data-accent="eclipse"] .index {
+  color: rgb(157 107 255 / 88%);
+}
+
+.product[data-accent="pulse"] .index {
+  color: var(--vyro-accent-orange-soft);
+}
+
+.name {
+  margin: 0;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: clamp(1.75rem, 4.5vw, 2.125rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.blurb {
+  margin: 0;
+  font-size: var(--vyro-text-body);
+  line-height: 1.5;
+  color: var(--vyro-text-secondary);
+}
+
+.explore {
+  display: inline-block;
+  margin-top: 0;
+  padding: 0;
+  font-size: var(--vyro-text-caption);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: default;
+  transition:
+    transform var(--featured-transition),
+    filter var(--featured-transition);
+}
+
+.product[data-accent="nexus"] .explore {
+  color: var(--vyro-accent-blue);
+}
+
+.product[data-accent="eclipse"] .explore {
+  color: var(--vyro-accent-purple);
+}
+
+.product[data-accent="pulse"] .explore {
+  color: var(--vyro-accent-orange);
+}
+
+.product:hover .shoeWrap,
+.product:focus-within .shoeWrap {
+  transform: translateY(-0.375rem) scale(1.015);
+}
+
+.product:hover .effectBack,
+.product:focus-within .effectBack {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.03);
+}
+
+.product:hover .explore,
+.product:focus-within .explore {
+  transform: translateX(0.25rem);
+  filter: brightness(1.14);
+}
+
+@include vyro-breakpoint(md) {
+  .section {
+    padding-block: var(--vyro-space-6) var(--vyro-space-7);
+  }
+
+  .inner {
+    gap: var(--vyro-space-4);
+  }
+
+  .heading {
+    max-width: 30rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(var(--vyro-space-4), 2.2vw, var(--vyro-space-6));
+    align-items: start;
+  }
+
+  .product {
+    gap: var(--vyro-space-2);
+  }
+
+  .visual {
+    height: auto;
+    min-height: 0;
+    padding-block: 0;
+  }
+
+  .composition {
+    width: min(108%, 19.5rem);
+  }
+
+  .meta {
+    max-width: none;
+    padding-inline: var(--vyro-space-1);
+  }
+
+}
+
+@include vyro-breakpoint(lg) {
+  .section {
+    padding-block: var(--vyro-space-6);
+  }
+
+  .inner {
+    gap: var(--vyro-space-3);
+  }
+
+  .visual {
+    margin-bottom: 0;
+  }
+
+  .composition {
+    width: min(108%, 21rem);
+  }
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding-bottom: var(--vyro-space-10);
+  }
+
+  .inner {
+    gap: clamp(var(--vyro-space-5), 4.5vw, var(--vyro-space-6));
+  }
+
+  .grid {
+    gap: var(--vyro-space-6);
+  }
+
+  .product {
+    gap: var(--vyro-space-2);
+  }
+
+  .visual {
+    height: clamp(11.75rem, 42vw, 14.75rem);
+    padding-inline: var(--vyro-space-2);
+    overflow-x: clip;
+  }
+
+  .composition {
+    width: min(96%, 21.75rem);
+  }
+
+  .effectBack {
+    width: 112%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shoeWrap,
+  .effectBack,
+  .composition,
+  .explore {
+    transition: none;
+  }
+
+  .product:hover .shoeWrap,
+  .product:focus-within .shoeWrap,
+  .product:hover .explore,
+  .product:focus-within .explore {
+    transform: none;
+  }
+}
