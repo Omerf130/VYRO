@@ -1,0 +1,17 @@
+.root {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--vyro-container-gutter);
+}
+
+.default {
+  max-width: var(--vyro-container-max);
+}
+
+.wide {
+  max-width: var(--vyro-container-wide);
+}
+
+.narrow {
+  max-width: var(--vyro-container-narrow);
+}

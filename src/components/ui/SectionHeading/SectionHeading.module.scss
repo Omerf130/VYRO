@@ -1,0 +1,41 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--vyro-space-3);
+}
+
+.start {
+  text-align: start;
+  align-items: flex-start;
+}
+
+.center {
+  text-align: center;
+  align-items: center;
+}
+
+.overline {
+  font-size: var(--vyro-text-overline);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--vyro-accent-purple);
+}
+
+.title {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: var(--vyro-text-display-lg);
+  font-weight: 700;
+  line-height: var(--vyro-leading-display);
+  letter-spacing: -0.02em;
+}
+
+.description {
+  max-width: 42ch;
+  font-size: var(--vyro-text-body-lg);
+  color: var(--vyro-text-secondary);
+}
+
+.center .description {
+  margin-inline: auto;
+}

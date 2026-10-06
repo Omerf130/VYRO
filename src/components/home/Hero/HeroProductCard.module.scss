@@ -1,0 +1,113 @@
+.card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--vyro-space-3);
+  max-width: 13.5rem;
+  padding: var(--vyro-space-3) var(--vyro-space-4);
+  border: 1px solid rgb(255 255 255 / 8%);
+  border-radius: var(--vyro-radius-md);
+  background: rgb(15 16 20 / 48%);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 28%);
+  transition:
+    border-color var(--vyro-duration-slow) var(--vyro-ease-out),
+    box-shadow var(--vyro-duration-slow) var(--vyro-ease-out),
+    background-color var(--vyro-duration-slow) var(--vyro-ease-out);
+}
+
+.solar {
+  border-color: rgb(255 92 26 / 18%);
+  background: rgb(20 14 12 / 42%);
+  box-shadow:
+    0 12px 28px rgb(0 0 0 / 26%),
+    0 0 36px rgb(255 92 26 / 10%);
+}
+
+.aurora {
+  border-color: rgb(77 163 255 / 18%);
+  background: rgb(12 16 22 / 42%);
+  box-shadow:
+    0 12px 28px rgb(0 0 0 / 26%),
+    0 0 36px rgb(77 163 255 / 10%);
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--vyro-space-1);
+}
+
+.line1 {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--vyro-text-muted);
+}
+
+.line2 {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+.solar .line2 {
+  color: var(--vyro-accent-orange-soft);
+}
+
+.aurora .line2 {
+  color: var(--vyro-accent-blue);
+}
+
+.description {
+  margin-top: var(--vyro-space-2);
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--vyro-text-secondary);
+}
+
+.action {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1px solid var(--vyro-border-subtle);
+  border-radius: var(--vyro-radius-full);
+  color: var(--vyro-text-muted);
+}
+
+@media (max-width: 767px) {
+  .compactLayout {
+    max-width: 100%;
+    padding: var(--vyro-space-2) var(--vyro-space-3);
+    gap: var(--vyro-space-2);
+    border-radius: var(--vyro-radius-md);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 28px rgb(0 0 0 / 32%);
+  }
+
+  .compactLayout .line1 {
+    font-size: 0.625rem;
+    letter-spacing: 0.14em;
+  }
+
+  .compactLayout .line2 {
+    font-size: 1rem;
+  }
+
+  .compactLayout .description {
+    margin-top: var(--vyro-space-1);
+    font-size: 0.6875rem;
+    line-height: 1.4;
+  }
+
+  .compactLayout .action {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}

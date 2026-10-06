@@ -1,0 +1,197 @@
+@use "tokens/colors" as colors;
+@use "tokens/spacing" as spacing;
+@use "tokens/radius" as radius;
+@use "tokens/motion" as motion;
+@use "tokens/shadows" as shadows;
+@use "tokens/typography" as typography;
+
+:root {
+  --vyro-bg-base: #{colors.$vyro-bg-base};
+  --vyro-bg-elevated: #{colors.$vyro-bg-elevated};
+  --vyro-bg-surface: #{colors.$vyro-bg-surface};
+  --vyro-bg-overlay: rgb(15 16 20 / 85%);
+
+  --vyro-text-primary: #{colors.$vyro-text-primary};
+  --vyro-text-secondary: #{colors.$vyro-text-secondary};
+  --vyro-text-muted: #{colors.$vyro-text-muted};
+
+  --vyro-border-subtle: #{colors.$vyro-border-subtle};
+  --vyro-border-default: #{colors.$vyro-border-default};
+  --vyro-border-strong: #{colors.$vyro-border-strong};
+
+  --vyro-accent-orange: #{colors.$vyro-accent-orange};
+  --vyro-accent-orange-soft: #{colors.$vyro-accent-orange-soft};
+  --vyro-accent-purple: #{colors.$vyro-accent-purple};
+  --vyro-accent-blue: #{colors.$vyro-accent-blue};
+
+  --vyro-gradient-brand: linear-gradient(
+    135deg,
+    #{colors.$vyro-accent-orange} 0%,
+    #{colors.$vyro-accent-purple} 55%,
+    #{colors.$vyro-accent-blue} 100%
+  );
+  --vyro-gradient-warm: linear-gradient(
+    120deg,
+    #{colors.$vyro-accent-orange},
+    #{colors.$vyro-accent-purple}
+  );
+  --vyro-gradient-cool: linear-gradient(
+    120deg,
+    #{colors.$vyro-accent-purple},
+    #{colors.$vyro-accent-blue}
+  );
+
+  --vyro-focus-ring: #{colors.$vyro-focus-ring};
+  --vyro-success: #{colors.$vyro-success};
+  --vyro-error: #{colors.$vyro-error};
+
+  @each $step, $value in spacing.$vyro-space-scale {
+    --vyro-space-#{$step}: #{$value};
+  }
+
+  --vyro-radius-sm: #{radius.$vyro-radius-sm};
+  --vyro-radius-md: #{radius.$vyro-radius-md};
+  --vyro-radius-lg: #{radius.$vyro-radius-lg};
+  --vyro-radius-xl: #{radius.$vyro-radius-xl};
+  --vyro-radius-full: #{radius.$vyro-radius-full};
+
+  --vyro-container-max: 1280px;
+  --vyro-container-wide: 1440px;
+  --vyro-container-narrow: 720px;
+  --vyro-container-gutter: var(--vyro-space-4);
+
+  --vyro-shadow-sm: #{shadows.$vyro-shadow-sm};
+  --vyro-shadow-md: #{shadows.$vyro-shadow-md};
+  --vyro-shadow-lg: #{shadows.$vyro-shadow-lg};
+  --vyro-glow-orange: #{shadows.$vyro-glow-orange};
+  --vyro-glow-purple: #{shadows.$vyro-glow-purple};
+
+  --vyro-duration-fast: #{motion.$vyro-duration-fast};
+  --vyro-duration-normal: #{motion.$vyro-duration-normal};
+  --vyro-duration-slow: #{motion.$vyro-duration-slow};
+  --vyro-ease-out: #{motion.$vyro-ease-out};
+  --vyro-ease-in-out: #{motion.$vyro-ease-in-out};
+
+  --vyro-text-display-xl: #{typography.$vyro-text-display-xl};
+  --vyro-text-display-lg: #{typography.$vyro-text-display-lg};
+  --vyro-text-h1: #{typography.$vyro-text-h1};
+  --vyro-text-h2: #{typography.$vyro-text-h2};
+  --vyro-text-h3: #{typography.$vyro-text-h3};
+  --vyro-text-body-lg: #{typography.$vyro-text-body-lg};
+  --vyro-text-body: #{typography.$vyro-text-body};
+  --vyro-text-caption: #{typography.$vyro-text-caption};
+  --vyro-text-overline: #{typography.$vyro-text-overline};
+
+  --vyro-leading-display: #{typography.$vyro-leading-display};
+  --vyro-leading-heading: #{typography.$vyro-leading-heading};
+  --vyro-leading-body: #{typography.$vyro-leading-body};
+}
+
+@media (min-width: 768px) {
+  :root {
+    --vyro-container-gutter: var(--vyro-space-5);
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --vyro-container-gutter: var(--vyro-space-6);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: var(--vyro-text-body);
+  line-height: var(--vyro-leading-body);
+  color: var(--vyro-text-primary);
+  background-color: var(--vyro-bg-base);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--vyro-focus-ring);
+  outline-offset: 2px;
+}
+
+.skipLink {
+  position: absolute;
+  top: var(--vyro-space-4);
+  left: var(--vyro-space-4);
+  z-index: 1000;
+  padding: var(--vyro-space-3) var(--vyro-space-4);
+  border-radius: var(--vyro-radius-md);
+  background: var(--vyro-bg-surface);
+  color: var(--vyro-text-primary);
+  transform: translateY(-200%);
+  transition: transform var(--vyro-duration-normal) var(--vyro-ease-out);
+}
+
+.skipLink:focus {
+  transform: translateY(0);
+}

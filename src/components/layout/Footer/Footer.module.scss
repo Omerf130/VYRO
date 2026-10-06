@@ -1,0 +1,63 @@
+@use "../../../styles/abstracts/mixins" as *;
+
+.root {
+  margin-top: auto;
+  border-top: 1px solid var(--vyro-border-subtle);
+  background: var(--vyro-bg-elevated);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--vyro-space-6);
+  padding-block: var(--vyro-space-8);
+}
+
+@include vyro-breakpoint(md) {
+  .inner {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.brandBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--vyro-space-2);
+}
+
+.navList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--vyro-space-4) var(--vyro-space-6);
+}
+
+.navItem,
+.navItemDisabled {
+  font-size: var(--vyro-text-caption);
+  color: var(--vyro-text-secondary);
+}
+
+.navItem:hover {
+  color: var(--vyro-text-primary);
+}
+
+.navItemDisabled {
+  color: var(--vyro-text-muted);
+  cursor: not-allowed;
+}
+
+.copy {
+  width: 100%;
+  font-size: var(--vyro-text-caption);
+  color: var(--vyro-text-muted);
+}
+
+@include vyro-breakpoint(md) {
+  .copy {
+    width: auto;
+    text-align: end;
+  }
+}

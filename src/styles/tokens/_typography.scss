@@ -1,0 +1,13 @@
+$vyro-text-display-xl: clamp(3rem, 5vw + 1.5rem, 4.5rem);
+$vyro-text-display-lg: clamp(2.5rem, 3vw + 1.25rem, 3.5rem);
+$vyro-text-h1: clamp(2rem, 2vw + 1rem, 3rem);
+$vyro-text-h2: clamp(1.75rem, 1.5vw + 0.75rem, 2.25rem);
+$vyro-text-h3: clamp(1.25rem, 0.5vw + 1rem, 1.5rem);
+$vyro-text-body-lg: clamp(1rem, 0.25vw + 0.9rem, 1.125rem);
+$vyro-text-body: clamp(0.9375rem, 0.15vw + 0.9rem, 1rem);
+$vyro-text-caption: clamp(0.8125rem, 0.1vw + 0.78rem, 0.875rem);
+$vyro-text-overline: 0.75rem;
+
+$vyro-leading-display: 1.05;
+$vyro-leading-heading: 1.12;
+$vyro-leading-body: 1.6;

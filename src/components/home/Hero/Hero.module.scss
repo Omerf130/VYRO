@@ -1,0 +1,695 @@
+@use "../../../styles/abstracts/mixins" as *;
+
+.hero {
+  --hero-transition: var(--vyro-duration-slow) var(--vyro-ease-out);
+  --shoe-glow: rgb(255 92 26 / 22%);
+  position: relative;
+  isolation: isolate;
+  min-height: calc(100dvh - 4rem);
+  overflow: hidden;
+  background: var(--vyro-bg-base);
+}
+
+.hero[data-look="aurora"] {
+  --shoe-glow: rgb(64 200 255 / 24%);
+}
+
+.heroBubbleCanvas {
+  display: none;
+}
+
+.heroVignette {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(
+      ellipse 72% 62% at 68% 42%,
+      transparent 0%,
+      rgb(15 16 20 / 28%) 55%,
+      rgb(15 16 20 / 78%) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgb(15 16 20 / 82%) 0%,
+      rgb(15 16 20 / 18%) 38%,
+      rgb(15 16 20 / 48%) 100%
+    );
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: var(--vyro-space-6);
+  align-content: center;
+  min-height: calc(100dvh - 4rem);
+  padding-block: var(--vyro-space-9) var(--vyro-space-8);
+}
+
+.campaign {
+  display: flex;
+  flex-direction: column;
+  gap: var(--vyro-space-5);
+  grid-area: campaign;
+  max-width: 22rem;
+}
+
+.selector {
+  grid-area: selector;
+  align-self: end;
+  padding-bottom: var(--vyro-space-2);
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--vyro-space-3);
+  grid-area: ctas;
+}
+
+.cta {
+  min-height: 2.75rem;
+  padding-inline: var(--vyro-space-5);
+  font-size: var(--vyro-text-caption);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.headline {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: clamp(3rem, 10vw, 4.25rem);
+  font-weight: 800;
+  line-height: 0.94;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.headlineLine {
+  display: block;
+}
+
+.supporting {
+  max-width: 16ch;
+  font-size: clamp(0.8125rem, 1.2vw, 0.875rem);
+  font-weight: 600;
+  line-height: 1.55;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--vyro-text-secondary);
+}
+
+.visual {
+  position: relative;
+  z-index: 1;
+  grid-area: visual;
+  min-height: clamp(16rem, 46vw, 28rem);
+  overflow: visible;
+}
+
+.ambientStage {
+  pointer-events: none;
+  position: absolute;
+  inset: -18% -12% -8% -20%;
+  z-index: 0;
+  overflow: visible;
+}
+
+.distantGlow {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity var(--hero-transition);
+}
+
+.distantGlowSolar {
+  background: radial-gradient(
+    circle at 58% 44%,
+    rgb(255 120 60 / 10%) 0%,
+    rgb(157 107 255 / 6%) 36%,
+    transparent 58%
+  );
+}
+
+.distantGlowAurora {
+  background: radial-gradient(
+    circle at 58% 42%,
+    rgb(64 220 255 / 10%) 0%,
+    rgb(120 80 220 / 6%) 38%,
+    transparent 60%
+  );
+}
+
+.hero[data-look="solar"] .distantGlowSolar {
+  opacity: 1;
+}
+
+.hero[data-look="aurora"] .distantGlowAurora {
+  opacity: 1;
+}
+
+.productStage {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+}
+
+.bubbleDrift {
+  pointer-events: none;
+  position: absolute;
+  inset: -8% -10% -12% -6%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: heroBubbleDrift 10s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes heroBubbleDrift {
+  0% {
+    transform: translate3d(-2px, 2px, 0);
+  }
+
+  100% {
+    transform: translate3d(3px, -3px, 0);
+  }
+}
+
+.bubbleImage {
+  width: min(132%, 920px);
+  max-width: none;
+  height: auto;
+  object-fit: contain;
+}
+
+.shoeStage {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+}
+
+.shoeFrame {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 4%;
+  opacity: 0;
+  transition: opacity var(--hero-transition);
+  pointer-events: none;
+}
+
+.shoeFrameActive {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.shoeTransition {
+  transform: scale(0.94) translateY(1rem);
+  transition: transform var(--hero-transition);
+}
+
+.shoeTransitionActive {
+  transform: scale(1) translateY(0);
+}
+
+.shoeFloat {
+  transform: rotate(-6deg);
+  animation: heroShoeFloat 6s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes heroShoeFloat {
+  0% {
+    transform: rotate(-7deg) translateY(-8px);
+  }
+
+  100% {
+    transform: rotate(-5deg) translateY(8px);
+  }
+}
+
+.shoeImage {
+  position: relative;
+  z-index: 1;
+  width: min(96%, 780px);
+  max-width: none;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 24px rgb(0 0 0 / 22%))
+    drop-shadow(0 0 40px var(--shoe-glow));
+}
+
+.cardArea {
+  position: relative;
+  z-index: 3;
+  grid-area: card;
+  width: min(100%, 13.5rem);
+}
+
+.cardFrame {
+  opacity: 0;
+  transform: translateY(0.75rem);
+  transition:
+    opacity var(--hero-transition),
+    transform var(--hero-transition);
+  pointer-events: none;
+}
+
+.cardFrameActive {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.cardFrame:not(.cardFrameActive) {
+  position: absolute;
+  inset: 0 auto auto 0;
+}
+
+@include vyro-breakpoint(md) {
+  .inner {
+    grid-template-columns: minmax(0, 0.38fr) minmax(0, 0.62fr);
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "campaign visual"
+      "ctas visual"
+      "selector visual";
+    column-gap: var(--vyro-space-8);
+    row-gap: var(--vyro-space-5);
+    align-items: start;
+    padding-block: var(--vyro-space-10) var(--vyro-space-7);
+  }
+
+  .campaign {
+    max-width: min(38vw, 20rem);
+  }
+
+  .headline {
+    font-size: clamp(3.25rem, 5.5vw, 4.75rem);
+  }
+
+  .visual {
+    grid-row: 1 / -1;
+    min-height: clamp(20rem, 40vw, 30rem);
+  }
+
+  .productStage {
+    position: relative;
+    height: 100%;
+    min-height: inherit;
+    transform: translate(-2%, 0.5rem);
+  }
+
+  .cardArea {
+    position: absolute;
+    right: 0;
+    bottom: 10%;
+    z-index: 4;
+    width: min(100%, 13.5rem);
+  }
+
+  .bubbleImage {
+    width: min(128%, 820px);
+  }
+
+  .shoeFloat {
+    animation-duration: 6.5s;
+  }
+
+  .shoeImage {
+    width: min(100%, 810px);
+  }
+}
+
+@include vyro-breakpoint(lg) {
+  .inner {
+    position: relative;
+    grid-template-columns: minmax(0, 0.36fr) minmax(0, 0.64fr);
+    grid-template-rows: auto auto minmax(0, 1fr);
+    grid-template-areas:
+      "campaign visual"
+      "ctas visual"
+      "selector visual";
+    column-gap: clamp(2rem, 4vw, 4.5rem);
+    padding-block: clamp(3rem, 6vh, 5rem) clamp(2rem, 4vh, 3rem);
+  }
+
+  .campaign {
+    max-width: min(36vw, 22rem);
+  }
+
+  .headline {
+    font-size: clamp(3.5rem, 4.2vw, 5.25rem);
+  }
+
+  .visual {
+    position: relative;
+    min-height: clamp(22rem, 34vw, 32rem);
+  }
+
+  .productStage {
+    position: relative;
+    height: 100%;
+    min-height: inherit;
+    transform: translate(-5%, 0.875rem);
+  }
+
+  .bubbleImage {
+    width: min(130%, 900px);
+  }
+
+  .shoeImage {
+    width: min(98%, 840px);
+  }
+
+  .shoeFrame {
+    justify-content: center;
+    padding-top: 3%;
+    padding-right: 2%;
+  }
+
+  .cardArea {
+    position: absolute;
+    right: clamp(1.5rem, 5vw, 4.5rem);
+    bottom: 24%;
+    z-index: 4;
+    width: min(100%, 13.5rem);
+  }
+
+  .selector {
+    align-self: end;
+  }
+
+  .ctas {
+    margin-top: 1.25rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .headline {
+    font-size: clamp(4rem, 3.8vw, 5.5rem);
+  }
+
+  .productStage {
+    transform: translate(-6%, 1rem);
+  }
+
+  .bubbleImage {
+    width: min(128%, 940px);
+  }
+
+  .shoeImage {
+    width: min(98%, 870px);
+  }
+
+  .cardArea {
+    bottom: 26%;
+    right: clamp(2rem, 4.5vw, 5.5rem);
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+    width: 100%;
+    max-width: 100%;
+    min-height: auto;
+    overflow-x: clip;
+    overflow-y: visible;
+  }
+
+  .heroVignette {
+    background: none;
+  }
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-content: start;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    min-height: auto;
+    overflow-x: clip;
+    padding-block: var(--vyro-space-5) var(--vyro-space-6);
+  }
+
+  .inner > * {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .campaign {
+    position: relative;
+    z-index: 2;
+    gap: var(--vyro-space-3);
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin-bottom: 0;
+  }
+
+  .headline {
+    width: 100%;
+    max-width: 100%;
+    font-size: clamp(2.375rem, 11.4vw, 3rem);
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+  }
+
+  .headlineLine {
+    display: block;
+    max-width: 100%;
+  }
+
+  .headlineLine:nth-child(2) {
+    font-size: clamp(2rem, 9.55vw, 2.875rem);
+    letter-spacing: -0.068em;
+    line-height: 0.92;
+  }
+
+  .supporting {
+    max-width: 14ch;
+    font-size: 0.6875rem;
+    line-height: 1.5;
+    letter-spacing: 0.16em;
+  }
+
+  .visual {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 100%;
+    margin-inline: 0;
+    margin-top: -1.75rem;
+    margin-bottom: 1rem;
+    min-height: 0;
+    overflow-x: clip;
+    overflow-y: visible;
+    background: transparent;
+  }
+
+  .productStage {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    height: clamp(22.75rem, 128vw, 28.25rem);
+    transform: none;
+    overflow: visible;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .productStage .ambientStage {
+    display: none;
+  }
+
+  .heroBubbleCanvas {
+    display: block;
+    pointer-events: none;
+    position: absolute;
+    z-index: 0;
+    left: 0;
+    right: 0;
+    top: clamp(5.5rem, 34vw, 8.25rem);
+    height: clamp(25rem, 132vw, 30.5rem);
+    overflow: visible;
+    background: transparent;
+  }
+
+  .heroBubbleCanvas .bubbleDrift {
+    position: absolute;
+    inset: -20% -30% -26% -30%;
+    animation-duration: 12s;
+  }
+
+  .heroBubbleCanvas .bubbleImage {
+    display: block;
+    width: 168%;
+    max-width: none;
+    height: auto;
+    margin-inline: auto;
+    object-fit: contain;
+    -webkit-mask-image:
+      linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgb(0 0 0 / 35%) 8%,
+        #000 16%,
+        #000 66%,
+        rgb(0 0 0 / 45%) 82%,
+        transparent 92%
+      ),
+      linear-gradient(
+        to right,
+        transparent 0%,
+        rgb(0 0 0 / 30%) 7%,
+        #000 16%,
+        #000 84%,
+        rgb(0 0 0 / 30%) 93%,
+        transparent 100%
+      );
+    mask-image:
+      linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgb(0 0 0 / 35%) 8%,
+        #000 16%,
+        #000 66%,
+        rgb(0 0 0 / 45%) 82%,
+        transparent 92%
+      ),
+      linear-gradient(
+        to right,
+        transparent 0%,
+        rgb(0 0 0 / 30%) 7%,
+        #000 16%,
+        #000 84%,
+        rgb(0 0 0 / 30%) 93%,
+        transparent 100%
+      );
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+  }
+
+  .productStage > .bubbleDrift {
+    display: none;
+  }
+
+  .shoeStage {
+    z-index: 2;
+  }
+
+  .shoeFrame {
+    align-items: center;
+    justify-content: center;
+    padding: 2% 0 2% 4%;
+  }
+
+  .shoeFloat {
+    transform: rotate(-8deg) translateX(-0.5625rem);
+    animation-name: heroShoeFloatMobile;
+    animation-duration: 7s;
+  }
+
+  @keyframes heroShoeFloatMobile {
+    0% {
+      transform: rotate(-8.5deg) translateX(-0.5625rem) translateY(-3px);
+    }
+
+    100% {
+      transform: rotate(-7.5deg) translateX(-0.5625rem) translateY(3px);
+    }
+  }
+
+  .shoeImage {
+    width: 132%;
+    max-width: 26rem;
+  }
+
+  .cardArea {
+    position: absolute;
+    z-index: 4;
+    right: 0;
+    bottom: 8%;
+    left: auto;
+    width: min(72%, 12.5rem);
+    max-width: calc(100% - var(--vyro-space-2));
+    min-height: 4.75rem;
+    margin: 0;
+  }
+
+  .cardArea .cardFrame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+  }
+
+  .ctas {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--vyro-space-2);
+    width: 100%;
+    margin-top: 0;
+    isolation: isolate;
+  }
+
+  .cta {
+    width: 100%;
+  }
+
+  .selector {
+    align-self: flex-start;
+    width: 100%;
+    padding-bottom: 0;
+    margin-top: var(--vyro-space-3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero {
+    --hero-transition: 0ms;
+  }
+
+  .shoeTransition,
+  .shoeTransitionActive,
+  .cardFrame,
+  .cardFrameActive {
+    transform: none;
+  }
+
+  .shoeFloat {
+    animation: none;
+    transform: rotate(-6deg);
+  }
+
+  @media (max-width: 767px) {
+    .shoeFloat {
+      transform: rotate(-8deg) translateX(-0.5625rem);
+    }
+  }
+
+  .distantGlow {
+    transition: none;
+  }
+
+  .bubbleDrift {
+    animation: none;
+    transform: none;
+  }
+}

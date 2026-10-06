@@ -1,0 +1,77 @@
+.root {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--vyro-space-6);
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--vyro-space-2);
+  min-width: 2.5rem;
+}
+
+.tab {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: rgb(255 255 255 / 32%);
+  transition: color var(--vyro-duration-normal) var(--vyro-ease-out);
+}
+
+.tab:focus {
+  outline: none;
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--vyro-focus-ring);
+  outline-offset: 3px;
+}
+
+.tab[aria-selected="true"] {
+  color: rgb(255 255 255 / 92%);
+}
+
+.tab:hover {
+  color: var(--vyro-text-secondary);
+}
+
+.progressTrack {
+  position: relative;
+  width: 100%;
+  min-width: 2rem;
+  height: 1px;
+  background: rgb(255 255 255 / 14%);
+  overflow: hidden;
+}
+
+.progressFill {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--vyro-text-primary);
+  animation-name: heroLookProgress;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes heroLookProgress {
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progressFill {
+    width: 100%;
+    animation: none;
+  }
+}
